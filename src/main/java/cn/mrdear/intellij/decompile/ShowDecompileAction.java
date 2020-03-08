@@ -30,7 +30,6 @@ import org.jetbrains.org.objectweb.asm.ClassReader;
 import cn.mrdear.intellij.decompile.ui.ASMifiedToolPanel;
 import cn.mrdear.intellij.decompile.ui.ByteCodeToolPanel;
 import cn.mrdear.intellij.decompile.ui.CFRToolPanel;
-import cn.mrdear.intellij.decompile.ui.JavapToolPanel;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -177,7 +176,7 @@ public class ShowDecompileAction extends AnAction {
      */
     private void decompileAndShowWindow(Project project, @Nullable VirtualFile classFile) {
         if (classFile == null) {
-            JavapToolPanel.getInstance(project).setCode("// couldn't generate Javap view, no .class file found");
+//            JavapToolPanel.getInstance(project).setCode("// couldn't generate Javap view, no .class file found");
             ByteCodeToolPanel.getInstance(project).setCode("// couldn't generate ByteCode view, no .class file found");
             ASMifiedToolPanel.getInstance(project).setCode("// couldn't generate ASMified view, no .class file found");
             CFRToolPanel.getInstance(project).setCode("// couldn't generate CFR view, no .class file found");
@@ -198,7 +197,7 @@ public class ShowDecompileAction extends AnAction {
 
             String path = classFile.getPath();
 
-            JavapToolPanel.getInstance(project).decompile(path, writer);
+//            JavapToolPanel.getInstance(project).decompile(path, writer);
             ByteCodeToolPanel.getInstance(project).decompile(writer, reader);
             ASMifiedToolPanel.getInstance(project).decompile(writer, reader);
             CFRToolPanel.getInstance(project).decompile(path, writer, reader);
