@@ -39,5 +39,8 @@
             <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
             <add-to-group group-id="CodeMenu" anchor="last"/>
         </action>
+        <action id="OpenDecompileSetting" class="cn.mrdear.intellij.decompile.OpenDecompileSetting"
+                text="OpenDecompileSetting"
+                description="Open class decompile plugin setting panel"/>
     </actions>
 </idea-plugin>
