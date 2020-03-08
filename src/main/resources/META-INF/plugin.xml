@@ -21,7 +21,7 @@
                     factoryClass="cn.mrdear.intellij.decompile.ui.DecompileToolWindowFactory"/>
 
         <!--转换服务-->
-<!--        <projectService serviceImplementation="cn.mrdear.intellij.decompile.ui.JavapToolPanel"/>-->
+        <projectService serviceImplementation="cn.mrdear.intellij.decompile.ui.JavapToolPanel"/>
         <projectService serviceImplementation="cn.mrdear.intellij.decompile.ui.ByteCodeToolPanel"/>
         <projectService serviceImplementation="cn.mrdear.intellij.decompile.ui.ASMifiedToolPanel"/>
         <projectService serviceImplementation="cn.mrdear.intellij.decompile.ui.CFRToolPanel"/>

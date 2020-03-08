@@ -1,7 +1,16 @@
+# class decompile
 
+use javap & asm & cfr decompile .class file and show
 
+![](http://imgblog.mrdear.cn/1583656954.png?imageMogr2/thumbnail/!60p)
 
 ## javap
+
+use javap need external tools support, like this picture config
+
+![](http://imgblog.mrdear.cn/1583656067.png?imageMogr2/thumbnail/!100p)
+
+
 ```bash
   -help  --help  -?        输出此用法消息
   -version                 版本信息
@@ -24,6 +33,9 @@
 ```
 
 ## cfr
+
+refer to [http://www.benf.org/other/cfr/](http://www.benf.org/other/cfr/)
+
 ```bash
 CFR 0.149
 

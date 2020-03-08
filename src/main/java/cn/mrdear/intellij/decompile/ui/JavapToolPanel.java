@@ -1,13 +1,19 @@
 package cn.mrdear.intellij.decompile.ui;
 
+import com.intellij.execution.configurations.GeneralCommandLine;
+import com.intellij.execution.process.OSProcessHandler;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
-import com.sun.tools.javap.Main;
+import com.intellij.tools.Tool;
+import com.intellij.tools.ToolManager;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.PrintWriter;
+import cn.mrdear.intellij.decompile.util.ExternalToolsProcessListener;
+
 import java.io.StringWriter;
+import java.util.List;
 
 /**
  * @author Quding Ding
@@ -31,20 +37,45 @@ public class JavapToolPanel extends AbstractToolPanel {
 
     /**
      * 反编译为字节码
-     *
-     * @param stringWriter 输出位置
      */
-    public void decompile(String path, StringWriter stringWriter) {
-        try (PrintWriter printWriter = new PrintWriter(stringWriter)) {
-            // fill args
-            String[] args = StringUtils.split(SETTING.getJavap().concat(" ").concat(path), ' ');
-            // javap
-            Main.run(args, printWriter);
-            setCode(stringWriter.toString());
+    public void decompile(String path) {
+        StringWriter writer = new StringWriter();
+
+        List<Tool> tools = ToolManager.getInstance().getTools("External Tools");
+
+        Tool javap = tools.stream()
+            .filter(x -> x.getName().equalsIgnoreCase("javap"))
+            .findFirst().orElse(null);
+
+        if (null == javap) {
+            this.setCode("\n no javap command found on External Tools, you can refer to " +
+                "https://github.com/mrdear/class-decompile-intellij");
+            return;
+        }
+
+        this.setCode("please wait");
+
+        GeneralCommandLine commandLine = javap.createCommandLine((dataId) -> {
+            if (CommonDataKeys.PROJECT.getName().equals(dataId)) {
+                return project;
+            }
+            return null;
+        });
+
+        if (null == commandLine) {
+            return;
+        }
+
+        commandLine.withParameters(StringUtils.split(SETTING.getJavap()," "));
+        commandLine.addParameter(path);
+
+        try {
+            ExternalToolsProcessListener listener = new ExternalToolsProcessListener(writer, this);
+            OSProcessHandler handler = new OSProcessHandler(commandLine);
+            handler.addProcessListener(listener);
+            handler.startNotify();
         } catch (Exception e) {
-            setCode("decompile fail " + e.getMessage());
-        } finally {
-            stringWriter.getBuffer().setLength(0);
+            this.setCode("decompile fail " + e.getMessage());
         }
     }
 
