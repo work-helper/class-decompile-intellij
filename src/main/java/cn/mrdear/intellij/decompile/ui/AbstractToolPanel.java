@@ -12,6 +12,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 
 import cn.mrdear.intellij.decompile.OpenDecompileSetting;
+import cn.mrdear.intellij.decompile.ShowDiffAction;
 import cn.mrdear.intellij.decompile.state.Setting;
 
 import java.awt.BorderLayout;
@@ -20,6 +21,7 @@ import javax.swing.JPanel;
 
 /**
  * 展示面板
+ *
  * @author Quding Ding
  * @since 2020/3/7
  */
@@ -41,6 +43,8 @@ public abstract class AbstractToolPanel extends SimpleToolWindowPanel implements
      * 当前面板对应的编辑器
      */
     private Editor editor;
+
+    private ShowDiffAction diffAction;
     /**
      * 配置信息
      */
@@ -56,9 +60,13 @@ public abstract class AbstractToolPanel extends SimpleToolWindowPanel implements
 
     /**
      * 设置代码
+     *
      * @param code 代码
      */
     public void setCode(String code) {
+        // 存储上个版本
+        diffAction.storeLatest();
+        // 最新版本
         this.document.setText(code);
     }
 
@@ -68,6 +76,7 @@ public abstract class AbstractToolPanel extends SimpleToolWindowPanel implements
     private void setUI() {
         EditorFactory editorFactory = EditorFactory.getInstance();
         document = editorFactory.createDocument("");
+        diffAction = new ShowDiffAction(document);
         editor = editorFactory.createEditor(document, project,
             FileTypeManager.getInstance().getFileTypeByExtension("java"), true);
         // 主面板
@@ -75,7 +84,10 @@ public abstract class AbstractToolPanel extends SimpleToolWindowPanel implements
 
         // 添加工具栏
         DefaultActionGroup group = new DefaultActionGroup();
+
         group.add(OPEN_DECOMPILE_SETTING);
+        group.add(diffAction);
+
         ActionManager actionManager = ActionManager.getInstance();
         JPanel buttonsPanel = new JPanel(new BorderLayout());
         ActionToolbar actionToolBar = actionManager.createActionToolbar("Decompile", group, true);

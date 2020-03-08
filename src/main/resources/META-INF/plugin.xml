@@ -4,7 +4,8 @@
     <vendor email="niudear@foxmail.com" url="https://mrdear.cn">QuDing</vendor>
 
     <description><![CDATA[
-        use javap & asm & cfr decompile .class file and show
+        use javap & asm & cfr decompile .class file and show.
+        source code in <a href='https://github.com/work-helper/class-decompile-intellij'>class-decompile-intellij</a> base on asm-bytecode-intellij
     ]]></description>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
@@ -39,8 +40,5 @@
             <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
             <add-to-group group-id="CodeMenu" anchor="last"/>
         </action>
-        <action id="OpenDecompileSetting" class="cn.mrdear.intellij.decompile.OpenDecompileSetting"
-                text="OpenDecompileSetting"
-                description="Open class decompile plugin setting panel"/>
     </actions>
 </idea-plugin>
