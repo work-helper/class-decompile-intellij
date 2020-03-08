@@ -18,7 +18,7 @@ public class SwitchCaseExample {
     switch (key) {
       case "key1":
         return 1;
-      case "key2":
+      case "key4":
         break;
       case "key3":
       case "key3.1":

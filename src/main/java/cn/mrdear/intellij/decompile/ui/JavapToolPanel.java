@@ -53,8 +53,6 @@ public class JavapToolPanel extends AbstractToolPanel {
             return;
         }
 
-        this.setCode("please wait");
-
         GeneralCommandLine commandLine = javap.createCommandLine((dataId) -> {
             if (CommonDataKeys.PROJECT.getName().equals(dataId)) {
                 return project;

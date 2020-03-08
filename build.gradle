@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'cn.mrdear.intellij'
-version '0.0.2-SNAPSHOT'
+version '0.0.3'
 
 dependencies {
     compile group: 'org.benf', name: 'cfr', version: '0.149'
@@ -16,10 +16,13 @@ intellij {
 }
 patchPluginXml {
     changeNotes """
+      0.0.3: <br>
+      1. add diff tools
+      <br><br>
       0.0.2-SNAPSHOT: <br>
       1. javap use external tools refactor, because IDEA may be not contain tools.jar in libraries.
       2. add open setting toolbar
-       
+      <br><br>
       0.0.1-SNAPSHOT: <br>
       1. finish plugin refactor base on <a href='https://github.com/work-helper/asm-bytecode-intellij'>asm-bytecode-intellij</a><br>
       """
