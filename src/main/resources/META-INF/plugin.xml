@@ -1,0 +1,43 @@
+<idea-plugin>
+    <id>cn.mrdear.intellij.class-decompile-intellij</id>
+    <name>Class Decompile</name>
+    <vendor email="niudear@foxmail.com" url="https://mrdear.cn">QuDing</vendor>
+
+    <description><![CDATA[
+        use javap & asm & cfr decompile .class file and show
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <!--配置文件-->
+        <applicationService serviceImplementation="cn.mrdear.intellij.decompile.state.Setting"/>
+
+        <toolWindow id="Decompile" anchor="right" icon="/images/java.svg"
+                    factoryClass="cn.mrdear.intellij.decompile.ui.DecompileToolWindowFactory"/>
+
+        <!--转换服务-->
+        <projectService serviceImplementation="cn.mrdear.intellij.decompile.ui.JavapToolPanel"/>
+        <projectService serviceImplementation="cn.mrdear.intellij.decompile.ui.ByteCodeToolPanel"/>
+        <projectService serviceImplementation="cn.mrdear.intellij.decompile.ui.ASMifiedToolPanel"/>
+        <projectService serviceImplementation="cn.mrdear.intellij.decompile.ui.CFRToolPanel"/>
+
+        <!--设置界面-->
+        <applicationConfigurable instance="cn.mrdear.intellij.decompile.state.PluginSettingUIRegister"/>
+    </extensions>
+
+    <actions>
+
+        <action id="showDecompile" class="cn.mrdear.intellij.decompile.ShowDecompileAction"
+                text="Show Decompile Code"
+                description="Shows the decompile code from the current class">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <add-to-group group-id="CodeMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>

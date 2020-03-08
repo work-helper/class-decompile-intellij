@@ -1,0 +1,22 @@
+plugins {
+    id 'org.jetbrains.intellij' version '0.4.16'
+}
+
+group 'cn.mrdear.intellij'
+version '0.0.1-SNAPSHOT'
+
+dependencies {
+    compile group: 'org.benf', name: 'cfr', version: '0.149'
+}
+
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+    version '2019.3'
+    plugins = ['java']
+}
+patchPluginXml {
+    changeNotes """
+      0.0.1-SNAPSHOT: <br>
+      1. finish plugin refactor base on <a href='https://github.com/work-helper/asm-bytecode-intellij'>asm-bytecode-intellij</a><br>
+      """
+}
