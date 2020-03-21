@@ -2,6 +2,7 @@ package cn.mrdear.intellij.decompile.ui;
 
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.OSProcessHandler;
+import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
@@ -10,6 +11,7 @@ import com.intellij.tools.ToolManager;
 
 import org.apache.commons.lang3.StringUtils;
 
+import cn.mrdear.intellij.decompile.OpenHelperWebSiteAction;
 import cn.mrdear.intellij.decompile.util.ExternalToolsProcessListener;
 
 import java.io.StringWriter;
@@ -23,6 +25,11 @@ public class JavapToolPanel extends AbstractToolPanel {
 
     public JavapToolPanel(Project project) {
         super(project);
+    }
+
+    @Override
+    protected AnAction internalToolAction() {
+        return new OpenHelperWebSiteAction("https://docs.oracle.com/javase/8/docs/technotes/tools/windows/javap.html");
     }
 
     /**

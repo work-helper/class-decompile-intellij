@@ -3,6 +3,7 @@ package cn.mrdear.intellij.decompile.ui;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionToolbar;
+import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
@@ -87,6 +88,10 @@ public abstract class AbstractToolPanel extends SimpleToolWindowPanel implements
 
         group.add(OPEN_DECOMPILE_SETTING);
         group.add(diffAction);
+        AnAction action = internalToolAction();
+        if (null != action) {
+            group.add(action);
+        }
 
         ActionManager actionManager = ActionManager.getInstance();
         JPanel buttonsPanel = new JPanel(new BorderLayout());
@@ -94,6 +99,15 @@ public abstract class AbstractToolPanel extends SimpleToolWindowPanel implements
         buttonsPanel.add(actionToolBar.getComponent(), BorderLayout.CENTER);
 
         setToolbar(buttonsPanel);
+    }
+
+    /**
+     * 子类的action
+     *
+     * @return action
+     */
+    protected AnAction internalToolAction() {
+        return null;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package cn.mrdear.intellij.decompile.ui;
 
+import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 
@@ -11,6 +12,7 @@ import org.benf.cfr.reader.util.getopt.Options;
 import org.benf.cfr.reader.util.getopt.OptionsImpl;
 import org.jetbrains.org.objectweb.asm.ClassReader;
 
+import cn.mrdear.intellij.decompile.OpenHelperWebSiteAction;
 import cn.mrdear.intellij.decompile.util.ClassByteCodeSourceImpl;
 import cn.mrdear.intellij.decompile.util.StringWriterDumperFactory;
 
@@ -25,6 +27,11 @@ public class CFRToolPanel extends AbstractToolPanel {
 
     public CFRToolPanel(Project project) {
         super(project);
+    }
+
+    @Override
+    protected AnAction internalToolAction() {
+        return new OpenHelperWebSiteAction("https://www.benf.org/other/cfr/");
     }
 
     /**
