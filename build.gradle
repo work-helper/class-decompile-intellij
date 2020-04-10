@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'cn.mrdear.intellij'
-version '0.0.4'
+version '0.0.5'
 
 dependencies {
     compile group: 'org.benf', name: 'cfr', version: '0.149'
@@ -16,6 +16,8 @@ intellij {
 }
 patchPluginXml {
     changeNotes """
+      0.0.5:<br/>
+      1. support 2020.1 intellij version <br/>
       0.0.4: <br>
       1. cfr and javap add help link
       <br><br>
@@ -29,4 +31,6 @@ patchPluginXml {
       0.0.1-SNAPSHOT: <br>
       1. finish plugin refactor base on <a href='https://github.com/work-helper/asm-bytecode-intellij'>asm-bytecode-intellij</a><br>
       """
+    sinceBuild('191.0')
+    untilBuild("201.*")
 }
