@@ -30,7 +30,7 @@ public class ShowDiffAction extends AnAction {
     public ShowDiffAction(Document document) {
         super("Show Differences",
             "Shows differences from the previous version of bytecode for this file",
-            IconLoader.getIcon("/actions/diffWithCurrent.png"));
+            IconLoader.getIcon("/actions/diff.png"));
         this.document = document;
         this.prevCode = "";
     }
