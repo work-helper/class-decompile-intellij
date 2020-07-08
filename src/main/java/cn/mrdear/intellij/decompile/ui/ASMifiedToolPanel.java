@@ -1,5 +1,6 @@
 package cn.mrdear.intellij.decompile.ui;
 
+import cn.mrdear.intellij.decompile.util.UnicodeUtil;
 import com.intellij.ide.highlighter.JavaFileType;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
@@ -26,6 +27,7 @@ public class ASMifiedToolPanel extends AbstractToolPanel {
 
     /**
      * 得到当前实例
+     *
      * @param project 当前工程
      * @return 结果
      */
@@ -39,9 +41,11 @@ public class ASMifiedToolPanel extends AbstractToolPanel {
             reader.accept(new TraceClassVisitor(null, new ASMifier(), printWriter), SETTING.getAsmFlags());
 
             PsiFile psiFile = PsiFileFactory.getInstance(project).createFileFromText("temp.java",
-                JavaFileType.INSTANCE, stringWriter.toString());
+                    JavaFileType.INSTANCE, stringWriter.toString());
             CodeStyleManager.getInstance(project).reformat(psiFile);
-            this.setCode(psiFile.getText());
+
+            //unicode显示中文
+            this.setCode(UnicodeUtil.unicodeToNative(psiFile.getText()));
         } catch (Exception e) {
             this.setCode("decompile fail" + e.getMessage());
         } finally {

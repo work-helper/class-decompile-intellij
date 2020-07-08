@@ -1,5 +1,6 @@
 package cn.mrdear.intellij.decompile.ui;
 
+import cn.mrdear.intellij.decompile.util.UnicodeUtil;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 
@@ -38,7 +39,7 @@ public class ByteCodeToolPanel extends AbstractToolPanel {
         try (PrintWriter printWriter = new PrintWriter(stringWriter)) {
             ClassVisitor visitor = new TraceClassVisitor(printWriter);
             reader.accept(visitor, 0);
-            setCode(stringWriter.toString());
+            setCode(UnicodeUtil.unicodeToNative(stringWriter.toString()));
         } catch (Exception e) {
             setCode("decompile fail " + e.getMessage());
         } finally {

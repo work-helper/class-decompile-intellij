@@ -1,9 +1,29 @@
+buildscript {
+    repositories {
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+            allowInsecureProtocol true
+        }
+    }
+}
+
+
 plugins {
     id 'org.jetbrains.intellij' version '0.4.18'
 }
 
 group 'cn.mrdear.intellij'
 version '0.0.6'
+
+allprojects {
+    repositories {
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+            allowInsecureProtocol true
+        }
+    }
+}
+
 
 dependencies {
     compile group: 'org.benf', name: 'cfr', version: '0.150'

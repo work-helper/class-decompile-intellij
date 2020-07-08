@@ -1,5 +1,7 @@
 package cn.mrdear.intellij.decompile.ui;
 
+import cn.mrdear.intellij.decompile.util.UnicodeUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
@@ -48,9 +50,16 @@ public class CFRToolPanel extends AbstractToolPanel {
         // fill args
         Pair<List<String>, Options> optionsPair = null;
         try {
-            String temp = path.concat(" ").concat(SETTING.getCfr());
-            String[] args = StringUtils.split(temp, ' ');
+            String temp;
+            if (path.contains(".jar!/")) {
+                String[] pathArr = path.split(".jar!/");
+                String className = pathArr[1].substring(0, pathArr[1].length() - 6).replace("/", ".");
+                temp = className.concat(" ").concat(SETTING.getCfr()).concat(" --extraclasspath " + pathArr[0] + ".jar");
+            } else {
+                temp = path.concat(" ").concat(SETTING.getCfr());
+            }
 
+            String[] args = StringUtils.split(temp, ' ');
             GetOptParser getOptParser = new GetOptParser();
             optionsPair = getOptParser.parse(args, OptionsImpl.getFactory());
         } catch (Exception e) {
@@ -64,12 +73,14 @@ public class CFRToolPanel extends AbstractToolPanel {
             Options options = optionsPair.getSecond();
             if (!options.optionIsSet(OptionsImpl.HELP)) {
                 CfrDriver driver = new CfrDriver.Builder()
-                    .withBuiltOptions(options)
-                    .withOutputSink(new StringWriterDumperFactory(writer))
-                    .withClassFileSource(new ClassByteCodeSourceImpl(options, reader.b, "temp.java"))
-                    .build();
+                        .withBuiltOptions(options)
+                        .withOutputSink(new StringWriterDumperFactory(writer))
+                        .withClassFileSource(new ClassByteCodeSourceImpl(options, reader.b, "temp.java"))
+                        .build();
                 driver.analyse(optionsPair.getFirst());
-                this.setCode(writer.toString());
+
+                //unicode显示中文
+                this.setCode(UnicodeUtil.unicodeToNative(writer.toString()));
                 return;
             }
             writer.append("decompile fail");
