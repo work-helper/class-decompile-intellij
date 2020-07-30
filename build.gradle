@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'cn.mrdear.intellij'
-version '0.0.6'
+version '0.0.7'
 
 dependencies {
     compile group: 'org.benf', name: 'cfr', version: '0.150'
@@ -11,21 +11,18 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version '2020.1'
+    localPath '/Applications/IntelliJ IDEA.app/'
     plugins = ['java']
 }
 patchPluginXml {
     changeNotes """
+      0.0.7:<br/>
+      1. support intellij 2020.2 <br/>
       0.0.6:<br/>
       1. upgrade cfr version <br/>
       0.0.5:<br/>
       1. support 2020.1 intellij version <br/>
-      0.0.4: <br>
-      1. cfr and javap add help link
-      <br><br>
-      0.0.3: <br>
-      1. add diff tools
       """
     sinceBuild('192.1')
-    untilBuild("201.*")
+    untilBuild("202.*")
 }
