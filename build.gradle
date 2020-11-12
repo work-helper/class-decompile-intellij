@@ -13,7 +13,7 @@ plugins {
 }
 
 group 'cn.mrdear.intellij'
-version '0.0.6'
+version '0.0.7'
 
 allprojects {
     repositories {
@@ -30,22 +30,23 @@ dependencies {
 }
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
+//插件运行模拟器，一般为C版本，即社区版
 intellij {
-    version '2020.1.3'
+    version '2020.2.3'
     plugins = ['java']
 }
 patchPluginXml {
     changeNotes """
+       0.0.7:<br/>
+      1. support intellij 2020.2.x <br/>
       0.0.6:<br/>
       1. upgrade cfr version <br/>
       0.0.5:<br/>
       1. support 2020.1 intellij version <br/>
-      0.0.4: <br>
-      1. cfr and javap add help link
-      <br><br>
-      0.0.3: <br>
-      1. add diff tools
       """
     sinceBuild('192.1')
-    untilBuild("201.*")
+    //支持到2020.2.3版本
+    untilBuild("202.*")
 }
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'

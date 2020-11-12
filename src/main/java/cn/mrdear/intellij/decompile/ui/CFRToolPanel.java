@@ -1,7 +1,6 @@
 package cn.mrdear.intellij.decompile.ui;
 
 import cn.mrdear.intellij.decompile.util.UnicodeUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
