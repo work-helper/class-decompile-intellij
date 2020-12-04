@@ -177,11 +177,13 @@ public class ShowDecompileAction extends AnAction {
      */
     private void decompileAndShowWindow(Project project, @Nullable VirtualFile classFile) {
         if (classFile == null) {
-            JavapToolPanel.getInstance(project).setCode("// couldn't generate Javap view, no .class file found");
-            ByteCodeToolPanel.getInstance(project).setCode("// couldn't generate ByteCode view, no .class file found");
-            ASMifiedToolPanel.getInstance(project).setCode("// couldn't generate ASMified view, no .class file found");
-            CFRToolPanel.getInstance(project).setCode("// couldn't generate CFR view, no .class file found");
-            ToolWindowManager.getInstance(project).getToolWindow("Decompile").activate(null);
+            ApplicationManager.getApplication().runWriteAction(() -> {
+                JavapToolPanel.getInstance(project).setCode("// couldn't generate Javap view, no .class file found");
+                ByteCodeToolPanel.getInstance(project).setCode("// couldn't generate ByteCode view, no .class file found");
+                ASMifiedToolPanel.getInstance(project).setCode("// couldn't generate ASMified view, no .class file found");
+                CFRToolPanel.getInstance(project).setCode("// couldn't generate CFR view, no .class file found");
+                ToolWindowManager.getInstance(project).getToolWindow("Decompile").activate(null);
+            });
             return;
         }
 

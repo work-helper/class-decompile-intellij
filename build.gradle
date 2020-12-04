@@ -1,9 +1,9 @@
 plugins {
-    id 'org.jetbrains.intellij' version '0.4.18'
+    id 'org.jetbrains.intellij' version '0.6.5'
 }
 
 group 'cn.mrdear.intellij'
-version '0.0.7'
+version '0.0.8'
 
 dependencies {
     compile group: 'org.benf', name: 'cfr', version: '0.150'
@@ -16,6 +16,8 @@ intellij {
 }
 patchPluginXml {
     changeNotes """
+      0.0.8:<br/>
+      1. support intellij 2020.3 <br/>
       0.0.7:<br/>
       1. support intellij 2020.2 <br/>
       0.0.6:<br/>
@@ -24,5 +26,4 @@ patchPluginXml {
       1. support 2020.1 intellij version <br/>
       """
     sinceBuild('192.1')
-    untilBuild("202.*")
 }
