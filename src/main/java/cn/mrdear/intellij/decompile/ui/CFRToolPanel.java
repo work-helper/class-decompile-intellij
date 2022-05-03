@@ -1,7 +1,7 @@
 package cn.mrdear.intellij.decompile.ui;
 
 import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.components.Service;
 import com.intellij.openapi.project.Project;
 
 import org.apache.commons.lang3.StringUtils;
@@ -23,6 +23,7 @@ import java.util.List;
  * @author Quding Ding
  * @since 2020/3/7
  */
+@Service
 public class CFRToolPanel extends AbstractToolPanel {
 
     public CFRToolPanel(Project project) {
@@ -41,7 +42,7 @@ public class CFRToolPanel extends AbstractToolPanel {
      * @return 结果
      */
     public static CFRToolPanel getInstance(Project project) {
-        return ServiceManager.getService(project, CFRToolPanel.class);
+        return project.getService(CFRToolPanel.class);
     }
 
     public void decompile(String path, StringWriter writer, ClassReader reader) {

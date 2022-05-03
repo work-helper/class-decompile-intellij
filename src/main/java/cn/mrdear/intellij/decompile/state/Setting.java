@@ -1,7 +1,7 @@
 package cn.mrdear.intellij.decompile.state;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.util.xmlb.XmlSerializerUtil;
@@ -16,7 +16,7 @@ import org.jetbrains.org.objectweb.asm.ClassReader;
  * @since 2020/2/23
  */
 @State(name = "ClassDecompileConfig", storages = {@Storage("ClassDecompilePlugin.xml")})
-public class Setting implements PersistentStateComponent<Setting> {
+public final class Setting implements PersistentStateComponent<Setting> {
     /**
      * default -c
      */
@@ -35,7 +35,7 @@ public class Setting implements PersistentStateComponent<Setting> {
      * 全局单例
      */
     public static Setting getInstance() {
-        return ServiceManager.getService(Setting.class);
+        return ApplicationManager.getApplication().getService(Setting.class);
     }
 
     /**

@@ -1,7 +1,7 @@
 package cn.mrdear.intellij.decompile.ui;
 
 import com.intellij.ide.highlighter.JavaFileType;
-import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.components.Service;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiFileFactory;
@@ -18,6 +18,7 @@ import java.io.StringWriter;
  * @author Quding Ding
  * @since 2020/3/7
  */
+@Service
 public class ASMifiedToolPanel extends AbstractToolPanel {
 
     public ASMifiedToolPanel(Project project) {
@@ -30,7 +31,7 @@ public class ASMifiedToolPanel extends AbstractToolPanel {
      * @return 结果
      */
     public static ASMifiedToolPanel getInstance(Project project) {
-        return ServiceManager.getService(project, ASMifiedToolPanel.class);
+        return project.getService(ASMifiedToolPanel.class);
     }
 
 

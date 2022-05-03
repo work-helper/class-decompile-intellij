@@ -1,6 +1,6 @@
 package cn.mrdear.intellij.decompile.ui;
 
-import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.components.Service;
 import com.intellij.openapi.project.Project;
 
 import org.jetbrains.org.objectweb.asm.ClassReader;
@@ -14,6 +14,7 @@ import java.io.StringWriter;
  * @author Quding Ding
  * @since 2020/3/7
  */
+@Service
 public class ByteCodeToolPanel extends AbstractToolPanel {
 
     public ByteCodeToolPanel(Project project) {
@@ -26,7 +27,7 @@ public class ByteCodeToolPanel extends AbstractToolPanel {
      * @return 结果
      */
     public static ByteCodeToolPanel getInstance(Project project) {
-        return ServiceManager.getService(project, ByteCodeToolPanel.class);
+        return project.getService(ByteCodeToolPanel.class);
     }
 
     /**

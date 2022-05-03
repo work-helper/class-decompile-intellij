@@ -4,7 +4,6 @@ import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.OSProcessHandler;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.tools.Tool;
 import com.intellij.tools.ToolManager;
@@ -39,7 +38,7 @@ public class JavapToolPanel extends AbstractToolPanel {
      * @return 结果
      */
     public static JavapToolPanel getInstance(Project project) {
-        return ServiceManager.getService(project, JavapToolPanel.class);
+        return project.getService(JavapToolPanel.class);
     }
 
     /**
@@ -55,7 +54,7 @@ public class JavapToolPanel extends AbstractToolPanel {
             .findFirst().orElse(null);
 
         if (null == javap) {
-            this.setCode("\n no javap command found on External Tools, you can refer to " +
+            this.setCode("no javap command found on External Tools, you can refer to " +
                 "https://github.com/mrdear/class-decompile-intellij");
             return;
         }

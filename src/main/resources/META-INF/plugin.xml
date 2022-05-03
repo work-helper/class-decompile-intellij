@@ -11,14 +11,17 @@
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
     <depends>com.intellij.modules.platform</depends>
-    <depends>com.intellij.java</depends>
+    <depends>com.intellij.modules.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
         <!--配置文件-->
         <applicationService serviceImplementation="cn.mrdear.intellij.decompile.state.Setting"/>
+        <!--设置界面-->
+        <applicationConfigurable instance="cn.mrdear.intellij.decompile.state.PluginSettingUIRegister"/>
 
-        <toolWindow id="Decompile" anchor="right" icon="/images/java.svg"
+        <!--结果展示界面，默认不初始化展示-->
+        <toolWindow id="Decompile" anchor="right" icon="/images/java.svg" doNotActivateOnStart="true"
                     factoryClass="cn.mrdear.intellij.decompile.ui.DecompileToolWindowFactory"/>
 
         <!--转换服务-->
@@ -27,12 +30,9 @@
         <projectService serviceImplementation="cn.mrdear.intellij.decompile.ui.ASMifiedToolPanel"/>
         <projectService serviceImplementation="cn.mrdear.intellij.decompile.ui.CFRToolPanel"/>
 
-        <!--设置界面-->
-        <applicationConfigurable instance="cn.mrdear.intellij.decompile.state.PluginSettingUIRegister"/>
     </extensions>
 
     <actions>
-
         <action id="showDecompile" class="cn.mrdear.intellij.decompile.ShowDecompileAction"
                 text="Show Decompile Code"
                 description="Shows the decompile code from the current class">

@@ -94,8 +94,11 @@ public abstract class AbstractToolPanel extends SimpleToolWindowPanel implements
         }
 
         ActionManager actionManager = ActionManager.getInstance();
-        JPanel buttonsPanel = new JPanel(new BorderLayout());
+
         ActionToolbar actionToolBar = actionManager.createActionToolbar("Decompile", group, true);
+        actionToolBar.setTargetComponent(this);
+
+        JPanel buttonsPanel = new JPanel(new BorderLayout());
         buttonsPanel.add(actionToolBar.getComponent(), BorderLayout.CENTER);
 
         setToolbar(buttonsPanel);

@@ -12,9 +12,10 @@ import com.intellij.openapi.editor.impl.DocumentImpl;
 import com.intellij.openapi.util.IconLoader;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+
+import javax.swing.Icon;
 
 public class ShowDiffAction extends AnAction {
 
@@ -30,7 +31,7 @@ public class ShowDiffAction extends AnAction {
     public ShowDiffAction(Document document) {
         super("Show Differences",
             "Shows differences from the previous version of bytecode for this file",
-            IconLoader.getIcon("/actions/diff.png"));
+            IconLoader.getIcon("/actions/diff.png", Icon.class));
         this.document = document;
         this.prevCode = "";
     }
@@ -41,10 +42,9 @@ public class ShowDiffAction extends AnAction {
 
         diffManager.showDiff(e.getProject(),new ContentDiffRequest(){
 
-            @Nullable
             @Override
             public String getTitle() {
-                return "class decompile diff";
+                return "Class Decompile Diff";
             }
 
             @NotNull
@@ -58,7 +58,7 @@ public class ShowDiffAction extends AnAction {
             @NotNull
             @Override
             public List<String> getContentTitles() {
-                return Lists.newArrayList("cur", "pre");
+                return Lists.newArrayList("current", "previous");
             }
         });
 
