@@ -19,7 +19,7 @@ intellij {
 }
 tasks {
     patchPluginXml {
-        sinceBuild.set("221.2")
+        sinceBuild.set("212")
         changeNotes.set( """
         0.0.10:<br/>
         1. upgrade gradle to gradle kts <br/>
