@@ -10,12 +10,12 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.impl.DocumentImpl;
 import com.intellij.openapi.util.IconLoader;
+import com.intellij.util.ReflectionUtil;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-
-import javax.swing.Icon;
+import java.util.Objects;
 
 public class ShowDiffAction extends AnAction {
 
@@ -31,7 +31,7 @@ public class ShowDiffAction extends AnAction {
     public ShowDiffAction(Document document) {
         super("Show Differences",
             "Shows differences from the previous version of bytecode for this file",
-            IconLoader.getIcon("/actions/diff.png", Icon.class));
+            IconLoader.getIcon("/actions/diff.png", Objects.requireNonNull(ReflectionUtil.getGrandCallerClass())));
         this.document = document;
         this.prevCode = "";
     }
